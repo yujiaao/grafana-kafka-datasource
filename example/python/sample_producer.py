@@ -8,7 +8,7 @@ from time import sleep
 from random import random
 import json
 
-conf = {'bootstrap.servers': 'localhost:9092'}
+conf = {'bootstrap.servers': 'localhost:9092', 'client.id':'abc123'}
 producer = Producer(conf)
 
 counter = 1

@@ -19,6 +19,15 @@ export class ConfigEditor extends PureComponent<Props, State> {
     onOptionsChange({ ...options, jsonData });
   };
 
+  onClientIdChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { onOptionsChange, options } = this.props;
+    const jsonData = {
+      ...options.jsonData,
+      clientId: event.target.value,
+    };
+    onOptionsChange({ ...options, jsonData });
+  };
+
   onSecurityProtocolChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
     const jsonData = {
@@ -106,6 +115,18 @@ export class ConfigEditor extends PureComponent<Props, State> {
             inputWidth={30}
           />
         </div>
+
+        <div className="gf-form">
+          <FormField
+            label="ClientId"
+            labelWidth={11}
+            onChange={this.onClientIdChange}
+            value={jsonData.clientId || ''}
+            placeholder="abc123"
+            inputWidth={30}
+          />
+        </div>
+
 
         <div className="gf-form">
           <FormField

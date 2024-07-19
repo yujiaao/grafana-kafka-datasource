@@ -21,6 +21,7 @@ type Options struct {
 	// silently fails to parse the timeout from the s.JSONData.  Figure out why.
 	HealthcheckTimeout int32  `json:"healthcheckTimeout"`
 	Debug              string `json:"debug"`
+	ClientId		  string `json:"clientId"`
 }
 
 type KafkaClient struct {
@@ -33,6 +34,7 @@ type KafkaClient struct {
 	SaslPassword       string
 	Debug              string
 	HealthcheckTimeout int32
+	ClientId		   string
 }
 
 type KafkaMessage struct {
@@ -50,6 +52,7 @@ func NewKafkaClient(options Options) KafkaClient {
 		SaslPassword:       options.SaslPassword,
 		Debug:              options.Debug,
 		HealthcheckTimeout: options.HealthcheckTimeout,
+		ClientId: options.ClientId,
 	}
 	return client
 }
@@ -60,6 +63,7 @@ func (client *KafkaClient) consumerInitialize() {
 	config := kafka.ConfigMap{
 		"bootstrap.servers":  client.BootstrapServers,
 		"group.id":           "kafka-datasource",
+		"client.id": client.ClientId,
 		"enable.auto.commit": "false",
 	}
 
